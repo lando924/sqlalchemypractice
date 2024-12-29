@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db
+from models import db, connect_db, Pet
 
 app = Flask(__name__)
 
@@ -21,12 +21,12 @@ def home_page():
     """Shows home page"""
     return render_template('home.html')
 
- 
 if __name__ == "__main__":
     with app.app_context():
         try:
-            result = db.create_all()
+            db.create_all() 
+            print("Database tables created!")
         except Exception as e:
-            print(f"Error querying the databse:{e}")
+            print(f"Error querying the database:{e}")
 
     app.run
